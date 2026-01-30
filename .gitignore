@@ -8,3 +8,4 @@ dev.db-journal
 prisma/dev.db
 .DS_Store
 .idea
+tsconfig.tsbuildinfo

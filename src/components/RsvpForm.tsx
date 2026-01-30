@@ -28,7 +28,11 @@ export function RsvpForm() {
 
   function formatPhone(value: string) {
     const digits = value.replace(/\D/g, "");
-    const normalized = digits.startsWith("7") ? digits : digits.startsWith("8") ? "7" + digits.slice(1) : "7" + digits;
+    const normalized = digits.startsWith("7")
+      ? digits
+      : digits.startsWith("8")
+        ? "7" + digits.slice(1)
+        : "7" + digits;
     const d = normalized.slice(0, 11);
     const parts = d.split("");
     const has = (i: number) => parts.length > i;
@@ -62,7 +66,7 @@ export function RsvpForm() {
       });
 
       if (!res.ok) {
-        const j = (await res.json().catch(() => null)) as any;
+        const j = (await res.json().catch(() => null)) as { error?: string } | null;
         setError(j?.error ?? "Не удалось отправить форму");
         return;
       }
@@ -95,9 +99,7 @@ export function RsvpForm() {
           <span className="text-xs text-sage-700">Телефон</span>
           <input
             value={form.phone}
-            onChange={(e) =>
-              setForm((s) => ({ ...s, phone: formatPhone(e.target.value) }))
-            }
+            onChange={(e) => setForm((s) => ({ ...s, phone: formatPhone(e.target.value) }))}
             className="rounded-xl border border-sage-200 bg-sage-50 px-3 py-2 outline-none focus:ring-2 focus:ring-sage-300"
             placeholder="+7..."
             inputMode="tel"
@@ -109,7 +111,14 @@ export function RsvpForm() {
           <span className="text-xs text-sage-700">Количество гостей (включая вас)</span>
           <input
             value={form.guests}
-            onChange={(e) => setForm((s) => ({ ...s, guests: e.target.value as any }))}
+            onChange={(e) =>
+              setForm((s) => ({
+                ...s,
+                guests: Number.isNaN(e.currentTarget.valueAsNumber)
+                  ? 1
+                  : e.currentTarget.valueAsNumber,
+              }))
+            }
             className="rounded-xl border border-sage-200 bg-sage-50 px-3 py-2 outline-none focus:ring-2 focus:ring-sage-300"
             type="number"
             min={1}
@@ -143,9 +152,7 @@ export function RsvpForm() {
         </div>
 
         {error ? (
-          <div className="rounded-xl bg-red-50 text-red-700 px-3 py-2 text-sm">
-            {error}
-          </div>
+          <div className="rounded-xl bg-red-50 text-red-700 px-3 py-2 text-sm">{error}</div>
         ) : null}
 
         <button

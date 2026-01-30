@@ -29,7 +29,7 @@ export async function POST(req: Request) {
     if (!parsed.success) {
       return NextResponse.json(
         { error: parsed.error.issues[0]?.message ?? "Invalid input" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
     if (existing) {
       return NextResponse.json(
         { error: "Этот номер телефона уже подтверждал участие" },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
@@ -49,7 +49,8 @@ export async function POST(req: Request) {
       data: { ...parsed.data, phone },
     });
     return NextResponse.json({ id: created.id });
-  } catch (e) {
+  } catch (error) {
+    console.error("RSVP POST failed", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

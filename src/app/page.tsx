@@ -1,6 +1,5 @@
 import { HeroCard } from "@/components/HeroCard";
 import { Section } from "@/components/Section";
-import { weddingConfig } from "@/lib/config";
 import Image from "next/image";
 import Link from "next/link";
 

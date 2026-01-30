@@ -25,8 +25,9 @@ export function AdminTable() {
       if (!res.ok) throw new Error("Не удалось загрузить данные");
       const data = (await res.json()) as RsvpItem[];
       setItems(data);
-    } catch (e: any) {
-      setError(e?.message ?? "Ошибка загрузки");
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : "Ошибка загрузки";
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -117,9 +118,7 @@ export function AdminTable() {
                 <td className="px-4 py-3 text-sage-900">{x.fullName}</td>
                 <td className="px-4 py-3 text-sage-700">{x.phone}</td>
                 <td className="px-4 py-3 text-sage-700">{x.guests}</td>
-                <td className="px-4 py-3 text-sage-700">
-                  {x.attending ? "Приду" : "Не смогу"}
-                </td>
+                <td className="px-4 py-3 text-sage-700">{x.attending ? "Приду" : "Не смогу"}</td>
                 <td className="px-4 py-3 text-[11px] text-sage-600">{x.id}</td>
                 <td className="px-4 py-3">
                   <button
