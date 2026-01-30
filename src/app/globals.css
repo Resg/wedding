@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "LeJardin";
+  src:
+    /*url("/fonts/LeJardin.woff2") format("woff2"),*/
+    url("/fonts/LeJardine.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "BickhamScript3";
+  src:
+    url("/fonts/BickhamScript3.woff2") format("woff2"),
+    url("/fonts/BickhamScript3.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Calme Extra";
+  src:
+    url("/fonts/CalmeExtra.woff2") format("woff2"),
+    url("/fonts/CalmeExtra.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SaintAmour";
+  src:
+    url("/fonts/SaintAmour.woff2") format("woff2"),
+    url("/fonts/SaintAmour.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "WonderSans";
+  src:
+    url("/fonts/WonderSans.woff2") format("woff2"),
+    url("/fonts/WonderSans.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  @apply text-sage-900;
+  background-color: #fdfdfd;
+}
+
+.container-page {
+  @apply mx-auto w-full max-w-[550px] px-4;
+  background: rgba(255, 255, 255, 0.69);
+}
+
+.font-lejardin {
+  font-family: "LeJardin", "Times New Roman", serif;
+}
+
+.font-bickham {
+  font-family: "BickhamScript3", "Times New Roman", serif;
+}
+
+.font-calme {
+  font-family: "Calme Extra", "Times New Roman", serif;
+}
+
+.font-saintamour {
+  font-family: "SaintAmour", "Times New Roman", serif;
+}
+
+.font-wondersans {
+  font-family: "WonderSans", "Times New Roman", serif;
+}
+
+.main-bg {
+  background: url("/images/upl1416.png") no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
