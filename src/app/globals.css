@@ -5,8 +5,8 @@
 @font-face {
   font-family: "LeJardin";
   src:
-    /*url("/fonts/LeJardin.woff2") format("woff2"),*/
-    url("/fonts/LeJardine.woff") format("woff");
+    /*url("/fonts/LeJardin.woff2") format("woff2"),*/ url("/fonts/LeJardine.woff")
+    format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -14,9 +14,7 @@
 
 @font-face {
   font-family: "BickhamScript3";
-  src:
-    url("/fonts/BickhamScript3.woff2") format("woff2"),
-    url("/fonts/BickhamScript3.woff") format("woff");
+  src: url("/fonts/BickhamScript3.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -24,9 +22,7 @@
 
 @font-face {
   font-family: "Calme Extra";
-  src:
-    url("/fonts/CalmeExtra.woff2") format("woff2"),
-    url("/fonts/CalmeExtra.woff") format("woff");
+  src: url("/fonts/CalmeExtra.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -34,28 +30,18 @@
 
 @font-face {
   font-family: "SaintAmour";
-  src:
-    url("/fonts/SaintAmour.woff2") format("woff2"),
-    url("/fonts/SaintAmour.woff") format("woff");
+  src: url("/fonts/SaintAmour.woff") format("woff");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-@font-face {
-  font-family: "WonderSans";
-  src:
-    url("/fonts/WonderSans.woff2") format("woff2"),
-    url("/fonts/WonderSans.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 :root {
   color-scheme: light;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -86,7 +72,7 @@ body {
 }
 
 .font-wondersans {
-  font-family: "WonderSans", "Times New Roman", serif;
+  font-family: "Calme Extra", "Times New Roman", serif;
 }
 
 .main-bg {
