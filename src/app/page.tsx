@@ -8,6 +8,7 @@ type HomePageProps = {
 };
 
 export function HomePage({ introText }: HomePageProps) {
+  console.log("КУДА ПОЛЕЗ???");
   return (
     <main className="pb-10">
       <HeroCard />
