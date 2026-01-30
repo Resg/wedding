@@ -1,6 +1,7 @@
 import { HeroCard } from "@/components/HeroCard";
 import { Section } from "@/components/Section";
 import { weddingConfig } from "@/lib/config";
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -18,17 +19,19 @@ export default function Home() {
             </div>
           </div>
           <p className="text-center text-[11.9903pt] font-calme text-black">
-            Мы рады сообщить Вам, что 25.04.2026 состоится самое главное торжество в
-            нашей жизни - день нашей свадьбы! Приглашаем Вас разделить с нами радость
-            этого незабываемого дня.
+            Мы рады сообщить Вам, что 25.04.2026 состоится самое главное торжество в нашей жизни -
+            день нашей свадьбы! Приглашаем Вас разделить с нами радость этого незабываемого дня.
           </p>
           <div className="mt-4 text-center text-[11.9903pt] font-calme text-black">
             25.04.2026 в 16:00
           </div>
           <div className="mt-6 flex justify-center">
-            <img
+            <Image
               src="/images/us.jpeg"
               alt="Сергей и Жанета"
+              width={699}
+              height={537}
+              sizes="(max-width: 768px) 90vw, 520px"
               className="w-full max-w-[520px] rounded-[200px] bg-white/80 object-cover"
             />
           </div>
@@ -36,9 +39,12 @@ export default function Home() {
             Там, где посеяна любовь, растёт радость!
           </div>
           <div className="mt-6 flex flex-col items-center gap-[40px]">
-            <img
+            <Image
               src="/images/sergey.jpeg"
               alt="Сергей"
+              width={1132}
+              height={1280}
+              sizes="(max-width: 768px) 80vw, 360px"
               className="aspect-square w-full max-w-[360px] rounded-full bg-white/80 object-cover"
             />
             <div className="text-center text-[27.4065pt] font-bickham text-[#61574c] leading-[1em]">
@@ -46,9 +52,12 @@ export default function Home() {
             </div>
           </div>
           <div className="mt-6 flex flex-col items-center gap-[40px]">
-            <img
+            <Image
               src="/images/zhaneta.jpeg"
               alt="Жанета"
+              width={1037}
+              height={1280}
+              sizes="(max-width: 768px) 80vw, 360px"
               className="aspect-square w-full max-w-[360px] rounded-full bg-white/80 object-cover"
             />
             <div className="text-center text-[27.4065pt] font-bickham text-[#61574c] leading-[1em]">
@@ -104,9 +113,12 @@ export default function Home() {
 
       <footer className="container-page mt-8 text-center">
         <div className="flex justify-center">
-          <img
+          <Image
             src="/icons/apple-touch-icon.png"
             alt=""
+            width={180}
+            height={180}
+            sizes="96px"
             className="h-[96px] w-[96px]"
           />
         </div>
