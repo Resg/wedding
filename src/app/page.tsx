@@ -104,7 +104,7 @@ export default function Home() {
         <iframe
           title="Ресторан La Delitsiya — Яндекс.Карты"
           src="https://yandex.ru/map-widget/v1/?ll=37.724206%2C55.432645&pt=37.724206%2C55.432645%2Cpm2rdm&z=14.28"
-          className="h-[520px] w-full border-0"
+          className="h-[360px] w-full border-0 md:h-[520px]"
           allowFullScreen
           loading="lazy"
         />
