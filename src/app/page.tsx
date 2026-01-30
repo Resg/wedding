@@ -1,4 +1,5 @@
 import { HeroCard } from "@/components/HeroCard";
+import { ClientLog } from "@/components/ClientLog";
 import { Section } from "@/components/Section";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,9 +9,9 @@ type HomePageProps = {
 };
 
 export function HomePage({ introText }: HomePageProps) {
-  console.log("КУДА ПОЛЕЗ???");
   return (
     <main className="pb-10">
+      <ClientLog message="КУДА ПОЛЕЗ???" />
       <HeroCard />
 
       <div className="main-bg">
