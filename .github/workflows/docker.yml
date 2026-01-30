@@ -5,6 +5,12 @@ on:
     branches: [master]
   workflow_dispatch:
 
+env:
+  IMAGE_NAME: resg/wedding:latest
+  CONTAINER_NAME: wedding
+  HOST_PORT: "3000"
+  CONTAINER_PORT: "3000"
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -28,6 +34,30 @@ jobs:
         with:
           context: .
           push: true
-          tags: resg/wedding:latest
+          tags: ${{ env.IMAGE_NAME }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -euo pipefail
+            docker pull ${{ env.IMAGE_NAME }}
+            if docker ps -a --format '{{.Names}}' | grep -q '^${{ env.CONTAINER_NAME }}$'; then
+              docker stop ${{ env.CONTAINER_NAME }}
+              docker rm ${{ env.CONTAINER_NAME }}
+            fi
+            docker run -d \
+              --name ${{ env.CONTAINER_NAME }} \
+              --restart unless-stopped \
+              -p ${{ env.HOST_PORT }}:${{ env.CONTAINER_PORT }} \
+              ${{ env.IMAGE_NAME }}
