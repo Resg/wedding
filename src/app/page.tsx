@@ -3,7 +3,11 @@ import { Section } from "@/components/Section";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Home() {
+type HomePageProps = {
+  introText?: string;
+};
+
+export function HomePage({ introText }: HomePageProps) {
   return (
     <main className="pb-10">
       <HeroCard />
@@ -18,8 +22,8 @@ export default function Home() {
             </div>
           </div>
           <p className="text-center text-[11.9903pt] font-calme text-black">
-            Мы рады сообщить Вам, что 25.04.2026 состоится самое главное торжество в нашей жизни -
-            день нашей свадьбы! Приглашаем Вас разделить с нами радость этого незабываемого дня.
+            {introText ??
+              "Мы рады сообщить Вам, что 25.04.2026 состоится самое главное торжество в нашей жизни - день нашей свадьбы! Приглашаем Вас разделить с нами радость этого незабываемого дня."}
           </p>
           <div className="mt-4 text-center text-[11.9903pt] font-calme text-black">
             25.04.2026 в 16:00
@@ -147,4 +151,8 @@ export default function Home() {
       </div>
     </main>
   );
+}
+
+export default function Home() {
+  return <HomePage />;
 }
