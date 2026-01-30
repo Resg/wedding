@@ -111,14 +111,13 @@ export function RsvpForm() {
           <span className="text-xs text-sage-700">Количество гостей (включая вас)</span>
           <input
             value={form.guests}
-            onChange={(e) =>
+            onChange={(e) => {
+              const value = e.currentTarget.valueAsNumber;
               setForm((s) => ({
                 ...s,
-                guests: Number.isNaN(e.currentTarget.valueAsNumber)
-                  ? 1
-                  : e.currentTarget.valueAsNumber,
-              }))
-            }
+                guests: Number.isNaN(value) ? 1 : value,
+              }));
+            }}
             className="rounded-xl border border-sage-200 bg-sage-50 px-3 py-2 outline-none focus:ring-2 focus:ring-sage-300"
             type="number"
             min={1}
