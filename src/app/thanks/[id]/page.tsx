@@ -4,8 +4,13 @@ import { weddingConfig } from "@/lib/config";
 
 export const dynamic = "force-dynamic";
 
-export default async function ThanksPage({ params }: { params: { id: string } }) {
-  const rsvp = await prisma.rsvp.findUnique({ where: { id: params.id } });
+export default async function ThanksPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const rsvp = await prisma.rsvp.findUnique({ where: { id } });
 
   if (!rsvp) {
     return (
