@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 const Schema = z.object({
   fullName: z.string().min(3),
   phone: z.string().min(7),
-  guests: z.number().int().min(1).max(20),
+  guests: z.number().int().min(1),
   attending: z.boolean().default(true),
 });
 

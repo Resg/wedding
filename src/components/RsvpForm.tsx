@@ -7,11 +7,16 @@ import { useRouter } from "next/navigation";
 const Schema = z.object({
   fullName: z.string().min(3, "Укажите ФИО полностью"),
   phone: z.string().min(7, "Укажите номер телефона"),
-  guests: z.coerce.number().int().min(1, "Минимум 1").max(20, "Слишком много"),
+  guests: z.number().int().min(1, "Минимум 1"),
   attending: z.boolean(),
 });
 
-type FormState = z.infer<typeof Schema>;
+type FormState = {
+  fullName: string;
+  phone: string;
+  guests: string;
+  attending: boolean;
+};
 
 export function RsvpForm() {
   const router = useRouter();
@@ -20,11 +25,12 @@ export function RsvpForm() {
   const [form, setForm] = useState<FormState>({
     fullName: "",
     phone: "",
-    guests: 1,
+    guests: "1",
     attending: true,
   });
 
   const [error, setError] = useState<string | null>(null);
+  const [guestsTouched, setGuestsTouched] = useState(false);
 
   function formatPhone(value: string) {
     const digits = value.replace(/\D/g, "");
@@ -45,14 +51,35 @@ export function RsvpForm() {
     return result;
   }
 
+  function parseGuests(value: string) {
+    if (value.trim() === "") return null;
+    const asNumber = Number(value);
+    if (Number.isNaN(asNumber)) return null;
+    return asNumber;
+  }
+
+  const guestsValue = useMemo(() => parseGuests(form.guests), [form.guests]);
+
+  const guestsError =
+    guestsTouched && (guestsValue === null || guestsValue < 1)
+      ? guestsValue === null
+        ? "Укажите количество гостей"
+        : "Минимум 1"
+      : null;
+
   const canSubmit = useMemo(() => {
-    const parsed = Schema.safeParse(form);
+    if (guestsValue === null || guestsValue < 1) return false;
+    const parsed = Schema.safeParse({ ...form, guests: guestsValue });
     return parsed.success;
-  }, [form]);
+  }, [form, guestsValue]);
 
   async function submit() {
     setError(null);
-    const parsed = Schema.safeParse(form);
+    if (guestsValue === null || guestsValue < 1) {
+      setGuestsTouched(true);
+      return;
+    }
+    const parsed = Schema.safeParse({ ...form, guests: guestsValue });
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Проверьте поля");
       return;
@@ -112,17 +139,18 @@ export function RsvpForm() {
           <input
             value={form.guests}
             onChange={(e) => {
-              const value = e.currentTarget.valueAsNumber;
+              const value = e.currentTarget.value;
+              setGuestsTouched(true);
               setForm((s) => ({
                 ...s,
-                guests: Number.isNaN(value) ? 1 : value,
+                guests: value,
               }));
             }}
             className="rounded-xl border border-sage-200 bg-sage-50 px-3 py-2 outline-none focus:ring-2 focus:ring-sage-300"
             type="number"
             min={1}
-            max={20}
           />
+          {guestsError ? <span className="text-xs text-red-600">{guestsError}</span> : null}
         </label>
 
         <div className="grid gap-2">

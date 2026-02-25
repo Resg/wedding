@@ -10,7 +10,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN if [ -f .env.example ] && [ ! -f .env ]; then cp .env.example .env; fi
-RUN corepack enable && yarn prisma:generate && yarn build
+RUN corepack enable && yarn prisma:generate && yarn prisma:migrate:deploy && yarn prisma:seed && yarn build
 
 FROM node:20-alpine AS runner
 WORKDIR /app
