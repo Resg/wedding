@@ -64,10 +64,7 @@ async function main() {
     return;
   }
 
-  const result = await prisma.rsvp.createMany({
-    data,
-    skipDuplicates: true,
-  });
+  const result = await prisma.rsvp.createMany({ data });
 
   console.log(`Seeded ${result.count} rows.`);
 }
